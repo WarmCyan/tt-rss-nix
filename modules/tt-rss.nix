@@ -475,7 +475,7 @@ in
         '';
       };
 
-      phpPackage = lib.lib.mkOption {
+      phpPackage = lib.mkOption {
         type = lib.types.package;
         default = pkgs.php;
         defaultText = "pkgs.php";
