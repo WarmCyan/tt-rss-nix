@@ -4,8 +4,6 @@ self: {
   pkgs,
   ...
 }:
-
-with lib;
 let
   cfg = config.services.tt-rss-legacy;
 
