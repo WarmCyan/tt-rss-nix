@@ -1,4 +1,4 @@
-{
+self: {
   config,
   lib,
   pkgs,
@@ -109,7 +109,7 @@ let
 
   # tt-rss and plugins and themes and config.php
   servedRoot = pkgs.runCommand "tt-rss-served-root" { } ''
-    cp --no-preserve=mode -r ${pkgs.tt-rss-legacy} $out
+    cp --no-preserve=mode -r ${self.packages.${pkgs.system}.tt-rss-legacy} $out
     cp ${tt-rss-config} $out/config.php
     ${optionalString (cfg.pluginPackages != [ ]) ''
       for plugin in ${concatStringsSep " " cfg.pluginPackages}; do
