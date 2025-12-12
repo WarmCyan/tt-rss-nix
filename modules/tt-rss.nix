@@ -110,12 +110,12 @@ let
     cp --no-preserve=mode -r ${self.packages.${pkgs.system}.tt-rss-legacy} $out
     cp ${tt-rss-config} $out/config.php
     ${lib.optionalString (cfg.pluginPackages != [ ]) ''
-      for plugin in ${concatStringsSep " " cfg.pluginPackages}; do
+      for plugin in ${lib.concatStringsSep " " cfg.pluginPackages}; do
       cp -r "$plugin"/* "$out/plugins.local/"
       done
     ''}
     ${lib.optionalString (cfg.themePackages != [ ]) ''
-      for theme in ${concatStringsSep " " cfg.themePackages}; do
+      for theme in ${lib.concatStringsSep " " cfg.themePackages}; do
       cp -r "$theme"/* "$out/themes.local/"
       done
     ''}
