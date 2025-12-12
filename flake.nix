@@ -22,6 +22,7 @@
       tt-rss-plugin-close-btn = import ./pkgs/tt-rss-plugin-close-btn;
       tt-rss-plugin-fresh-api = import ./pkgs/tt-rss-plugin-fresh-api;
       tt-rss-plugin-theme-feedly = import ./pkgs/tt-rss-plugin-theme-feedly;
+      tt-rss = import ./pkgs/tt-rss;
     });
 
     nixosModules = {
