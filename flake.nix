@@ -1,7 +1,7 @@
 {
   description = "Tiny tiny RSS service module and some plugins as of NixOS 25.05";
 
-  inputs.nixpkgs.url = "github.com:NixOS/nixpkgs/nixos-25.05";
+  # inputs.nixpkgs.url = "github.com:NixOS/nixpkgs/nixos-25.05";
 
   outputs = { self, nixpkgs, ... } @ inputs:
   let
