@@ -27,6 +27,7 @@
 
     nixosModules = {
       tt-rss = import ./modules/tt-rss.nix;
+      default = self.nixosModules.tt-rss;
     };
   };
 }
