@@ -582,7 +582,7 @@ in
       ${poolName} = {
         inherit (cfg) user;
         inherit phpPackage;
-        settings = mapAttrs (name: lib.mkDefault) {
+        settings = lib.mapAttrs (name: lib.mkDefault) {
           "listen.owner" = "nginx";
           "listen.group" = "nginx";
           "listen.mode" = "0600";
