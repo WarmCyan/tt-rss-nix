@@ -1,11 +1,9 @@
 {
   lib,
-  nixosTests,
-  stdenv,
-  fetchFromGitHub,
+  pkgs,
 }:
 
-stdenv.mkDerivation rec {
+pkgs.stdenv.mkDerivation rec {
   pname = "tt-rss-theme-feedly";
   version = "4.1.0";
 
@@ -15,7 +13,7 @@ stdenv.mkDerivation rec {
   #   rev = "v${version}";
   #   sha256 = "sha256-3mD1aY7gjdvucRzY7sLmZ1RsHtraAg1RGE/3uDp6/o4=";
   # };
-  src = prev.fetchFromGitHub {
+  src = pkgs.fetchFromGitHub {
     owner = "levito";
     repo = "tt-rss-feedly-theme";
     rev = "9b50cee70e1ed77d27a273e267c2f50455a23e6f";
@@ -30,10 +28,6 @@ stdenv.mkDerivation rec {
 
     cp -ra feedly *.css $out
   '';
-
-  passthru = {
-    tests = { inherit (nixosTests) tt-rss; };
-  };
 
   meta = with lib; {
     description = "Feedly theme for Tiny Tiny RSS";

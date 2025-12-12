@@ -1,14 +1,13 @@
 {
   lib,
-  stdenv,
-  fetchFromGitHub,
+  pkgs,
 }:
 
-stdenv.mkDerivation {
+pkgs.stdenv.mkDerivation {
   pname = "tt-rss-plugin-freshapi";
   version = "0-unstable-2024-11-14";
 
-  src = fetchFromGitHub {
+  src = pkgs.fetchFromGitHub {
     owner = "eric-pierce";
     repo = "freshapi";
     rev = "942b1c37ef2035444c3a22a21e225f3ece73c705"; # this and the line below needs to be updated based on the git sha of freshapi you want to install
