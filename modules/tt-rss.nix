@@ -51,15 +51,15 @@ let
         putenv('TTRSS_DB_PASS=' ${lib.optionalString (password != null) ". ${password}"});
         putenv('TTRSS_DB_PORT=${toString dbPort}');
 
-        putenv('TTRSS_AUTH_AUTO_CREATE=${boolToString cfg.auth.autoCreate}');
-        putenv('TTRSS_AUTH_AUTO_LOGIN=${boolToString cfg.auth.autoLogin}');
+        putenv('TTRSS_AUTH_AUTO_CREATE=${lib.boolToString cfg.auth.autoCreate}');
+        putenv('TTRSS_AUTH_AUTO_LOGIN=${lib.boolToString cfg.auth.autoLogin}');
 
         putenv('TTRSS_FEED_CRYPT_KEY=${lib.escape [ "'" "\\" ] cfg.feedCryptKey}');
 
 
-        putenv('TTRSS_SINGLE_USER_MODE=${boolToString cfg.singleUserMode}');
+        putenv('TTRSS_SINGLE_USER_MODE=${lib.boolToString cfg.singleUserMode}');
 
-        putenv('TTRSS_SIMPLE_UPDATE_MODE=${boolToString cfg.simpleUpdateMode}');
+        putenv('TTRSS_SIMPLE_UPDATE_MODE=${lib.boolToString cfg.simpleUpdateMode}');
 
         # Never check for updates - the running version of the code should
         # be controlled entirely by the version of TT-RSS active in the
@@ -75,7 +75,7 @@ let
 
         putenv('TTRSS_FORCE_ARTICLE_PURGE=${toString cfg.forceArticlePurge}');
         putenv('TTRSS_SESSION_COOKIE_LIFETIME=${toString cfg.sessionCookieLifetime}');
-        putenv('TTRSS_ENABLE_GZIP_OUTPUT=${boolToString cfg.enableGZipOutput}');
+        putenv('TTRSS_ENABLE_GZIP_OUTPUT=${lib.boolToString cfg.enableGZipOutput}');
 
         putenv('TTRSS_PLUGINS=${builtins.concatStringsSep "," cfg.plugins}');
 
@@ -83,13 +83,13 @@ let
         putenv('TTRSS_CONFIG_VERSION=${toString configVersion}');
 
 
-        putenv('TTRSS_PUBSUBHUBBUB_ENABLED=${boolToString cfg.pubSubHubbub.enable}');
+        putenv('TTRSS_PUBSUBHUBBUB_ENABLED=${lib.boolToString cfg.pubSubHubbub.enable}');
         putenv('TTRSS_PUBSUBHUBBUB_HUB=${cfg.pubSubHubbub.hub}');
 
         putenv('TTRSS_SPHINX_SERVER=${cfg.sphinx.server}');
         putenv('TTRSS_SPHINX_INDEX=${builtins.concatStringsSep "," cfg.sphinx.index}');
 
-        putenv('TTRSS_ENABLE_REGISTRATION=${boolToString cfg.registration.enable}');
+        putenv('TTRSS_ENABLE_REGISTRATION=${lib.boolToString cfg.registration.enable}');
         putenv('TTRSS_REG_NOTIFY_ADDRESS=${cfg.registration.notifyAddress}');
         putenv('TTRSS_REG_MAX_USERS=${toString cfg.registration.maxUsers}');
 
