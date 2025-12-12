@@ -690,7 +690,7 @@ in
       ];
     };
 
-    users.users.tt_rss = optionalAttrs (cfg.user == "tt_rss") {
+    users.users.tt_rss = lib.optionalAttrs (cfg.user == "tt_rss") {
       description = "tt-rss service user";
       isSystemUser = true;
       group = "tt_rss";
