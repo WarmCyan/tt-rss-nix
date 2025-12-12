@@ -130,26 +130,26 @@ in
 
     services.tt-rss-legacy = {
 
-      enable = mkEnableOption "tt-rss-legacy";
+      enable = lib.mkEnableOption "tt-rss-legacy";
 
-      root = mkOption {
-        type = types.path;
+      root = lib.mkOption {
+        type = lib.types.path;
         default = "/var/lib/tt-rss";
         description = ''
           Root of the application.
         '';
       };
 
-      user = mkOption {
-        type = types.str;
+      user = lib.mkOption {
+        type = lib.types.str;
         default = "tt_rss";
         description = ''
           User account under which both the update daemon and the web-application run.
         '';
       };
 
-      pool = mkOption {
-        type = types.str;
+      pool = lib.mkOption {
+        type = lib.types.str;
         default = "${poolName}";
         description = ''
           Name of existing phpfpm pool that is used to run web-application.
@@ -158,8 +158,8 @@ in
         '';
       };
 
-      virtualHost = mkOption {
-        type = types.nullOr types.str;
+      virtualHost = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
         default = "tt-rss";
         description = ''
           Name of the nginx virtualhost to use and setup. If null, do not setup any virtualhost.
@@ -167,8 +167,8 @@ in
       };
 
       database = {
-        type = mkOption {
-          type = types.enum [
+        type = lib.mkOption {
+          type = lib.types.enum [
             "pgsql"
             "mysql"
           ];
@@ -178,24 +178,24 @@ in
           '';
         };
 
-        host = mkOption {
-          type = types.nullOr types.str;
+        host = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
           default = null;
           description = ''
             Host of the database. Leave null to use Unix domain socket.
           '';
         };
 
-        name = mkOption {
-          type = types.str;
+        name = lib.mkOption {
+          type = lib.types.str;
           default = "tt_rss";
           description = ''
             Name of the existing database.
           '';
         };
 
-        user = mkOption {
-          type = types.str;
+        user = lib.mkOption {
+          type = lib.types.str;
           default = "tt_rss";
           description = ''
             The database user. The user must exist and has access to
@@ -203,24 +203,24 @@ in
           '';
         };
 
-        password = mkOption {
-          type = types.nullOr types.str;
+        password = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
           default = null;
           description = ''
             The database user's password.
           '';
         };
 
-        passwordFile = mkOption {
-          type = types.nullOr types.str;
+        passwordFile = lib.mkOption {
+          type = lib.types.nullOr lib.types.str;
           default = null;
           description = ''
             The database user's password.
           '';
         };
 
-        port = mkOption {
-          type = types.nullOr types.port;
+        port = lib.mkOption {
+          type = lib.types.nullOr lib.types.port;
           default = null;
           description = ''
             The database's port. If not set, the default ports will be provided (5432
@@ -228,16 +228,16 @@ in
           '';
         };
 
-        createLocally = mkOption {
-          type = types.bool;
+        createLocally = lib.mkOption {
+          type = lib.types.bool;
           default = true;
           description = "Create the database and database user locally.";
         };
       };
 
       auth = {
-        autoCreate = mkOption {
-          type = types.bool;
+        autoCreate = lib.mkOption {
+          type = lib.types.bool;
           default = true;
           description = ''
             Allow authentication modules to auto-create users in tt-rss internal
@@ -245,8 +245,8 @@ in
           '';
         };
 
-        autoLogin = mkOption {
-          type = types.bool;
+        autoLogin = lib.mkOption {
+          type = lib.types.bool;
           default = true;
           description = ''
             Automatically login user on remote or other kind of externally supplied
@@ -258,8 +258,8 @@ in
       };
 
       pubSubHubbub = {
-        hub = mkOption {
-          type = types.str;
+        hub = lib.mkOption {
+          type = lib.types.str;
           default = "";
           description = ''
             URL to a PubSubHubbub-compatible hub server. If defined, "Published
@@ -267,8 +267,8 @@ in
           '';
         };
 
-        enable = mkOption {
-          type = types.bool;
+        enable = lib.mkOption {
+          type = lib.types.bool;
           default = false;
           description = ''
             Enable client PubSubHubbub support in tt-rss. When disabled, tt-rss
@@ -278,16 +278,16 @@ in
       };
 
       sphinx = {
-        server = mkOption {
-          type = types.str;
+        server = lib.mkOption {
+          type = lib.types.str;
           default = "localhost:9312";
           description = ''
             Hostname:port combination for the Sphinx server.
           '';
         };
 
-        index = mkOption {
-          type = types.listOf types.str;
+        index = lib.mkOption {
+          type = lib.types.listOf lib.types.str;
           default = [
             "ttrss"
             "delta"
@@ -300,8 +300,8 @@ in
       };
 
       registration = {
-        enable = mkOption {
-          type = types.bool;
+        enable = lib.mkOption {
+          type = lib.types.bool;
           default = false;
           description = ''
             Allow users to register themselves. Please be aware that allowing
@@ -311,16 +311,16 @@ in
           '';
         };
 
-        notifyAddress = mkOption {
-          type = types.str;
+        notifyAddress = lib.mkOption {
+          type = lib.types.str;
           default = "";
           description = ''
             Email address to send new user notifications to.
           '';
         };
 
-        maxUsers = mkOption {
-          type = types.int;
+        maxUsers = lib.mkOption {
+          type = lib.types.int;
           default = 0;
           description = ''
             Maximum amount of users which will be allowed to register on this
@@ -330,8 +330,8 @@ in
       };
 
       email = {
-        server = mkOption {
-          type = types.str;
+        server = lib.mkOption {
+          type = lib.types.str;
           default = "";
           example = "localhost:25";
           description = ''
@@ -340,24 +340,24 @@ in
           '';
         };
 
-        login = mkOption {
-          type = types.str;
+        login = lib.mkOption {
+          type = lib.types.str;
           default = "";
           description = ''
             SMTP authentication login used when sending outgoing mail.
           '';
         };
 
-        password = mkOption {
-          type = types.str;
+        password = lib.mkOption {
+          type = lib.types.str;
           default = "";
           description = ''
             SMTP authentication password used when sending outgoing mail.
           '';
         };
 
-        security = mkOption {
-          type = types.enum [
+        security = lib.mkOption {
+          type = lib.types.enum [
             ""
             "ssl"
             "tls"
@@ -369,8 +369,8 @@ in
           '';
         };
 
-        fromName = mkOption {
-          type = types.str;
+        fromName = lib.mkOption {
+          type = lib.types.str;
           default = "Tiny Tiny RSS";
           description = ''
             Name for sending outgoing mail. This applies to password reset
@@ -378,8 +378,8 @@ in
           '';
         };
 
-        fromAddress = mkOption {
-          type = types.str;
+        fromAddress = lib.mkOption {
+          type = lib.types.str;
           default = "";
           description = ''
             Address for sending outgoing mail. This applies to password reset
@@ -387,8 +387,8 @@ in
           '';
         };
 
-        digestSubject = mkOption {
-          type = types.str;
+        digestSubject = lib.mkOption {
+          type = lib.types.str;
           default = "[tt-rss] New headlines for last 24 hours";
           description = ''
             Subject line for email digests.
@@ -396,8 +396,8 @@ in
         };
       };
 
-      sessionCookieLifetime = mkOption {
-        type = types.int;
+      sessionCookieLifetime = lib.mkOption {
+        type = lib.types.int;
         default = 86400;
         description = ''
           Default lifetime of a session (e.g. login) cookie. In seconds,
@@ -405,8 +405,8 @@ in
         '';
       };
 
-      selfUrlPath = mkOption {
-        type = types.str;
+      selfUrlPath = lib.mkOption {
+        type = lib.types.str;
         description = ''
           Full URL of your tt-rss installation. This should be set to the
           location of tt-rss directory, e.g. http://example.org/tt-rss/
@@ -416,8 +416,8 @@ in
         example = "http://localhost";
       };
 
-      feedCryptKey = mkOption {
-        type = types.str;
+      feedCryptKey = lib.mkOption {
+        type = lib.types.str;
         default = "";
         description = ''
           Key used for encryption of passwords for password-protected feeds
@@ -428,8 +428,8 @@ in
         '';
       };
 
-      singleUserMode = mkOption {
-        type = types.bool;
+      singleUserMode = lib.mkOption {
+        type = lib.types.bool;
         default = false;
 
         description = ''
@@ -439,8 +439,8 @@ in
         '';
       };
 
-      simpleUpdateMode = mkOption {
-        type = types.bool;
+      simpleUpdateMode = lib.mkOption {
+        type = lib.types.bool;
         default = false;
         description = ''
           Enables fallback update mode where tt-rss tries to update feeds in
@@ -453,8 +453,8 @@ in
         '';
       };
 
-      forceArticlePurge = mkOption {
-        type = types.int;
+      forceArticlePurge = lib.mkOption {
+        type = lib.types.int;
         default = 0;
         description = ''
           When this option is not 0, users ability to control feed purging
@@ -463,8 +463,8 @@ in
         '';
       };
 
-      enableGZipOutput = mkOption {
-        type = types.bool;
+      enableGZipOutput = lib.mkOption {
+        type = lib.types.bool;
         default = true;
         description = ''
           Selectively gzip output to improve wire performance. This requires
@@ -475,7 +475,7 @@ in
         '';
       };
 
-      phpPackage = lib.mkOption {
+      phpPackage = lib.lib.mkOption {
         type = lib.types.package;
         default = pkgs.php;
         defaultText = "pkgs.php";
@@ -484,8 +484,8 @@ in
         '';
       };
 
-      plugins = mkOption {
-        type = types.listOf types.str;
+      plugins = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
         default = [
           "auth_internal"
           "note"
@@ -501,8 +501,8 @@ in
         '';
       };
 
-      pluginPackages = mkOption {
-        type = types.listOf types.package;
+      pluginPackages = lib.mkOption {
+        type = lib.types.listOf lib.types.package;
         default = [ ];
         description = ''
           List of plugins to install. The list elements are expected to
@@ -511,8 +511,8 @@ in
         '';
       };
 
-      themePackages = mkOption {
-        type = types.listOf types.package;
+      themePackages = lib.mkOption {
+        type = lib.types.listOf lib.types.package;
         default = [ ];
         description = ''
           List of themes to install. The list elements are expected to
@@ -521,8 +521,8 @@ in
         '';
       };
 
-      logDestination = mkOption {
-        type = types.enum [
+      logDestination = lib.mkOption {
+        type = lib.types.enum [
           ""
           "sql"
           "syslog"
@@ -537,8 +537,8 @@ in
       };
 
       updateDaemon = {
-        commandFlags = mkOption {
-          type = types.str;
+        commandFlags = lib.mkOption {
+          type = lib.types.str;
           default = "--quiet";
           description = ''
             Command-line flags passed to the update daemon.
@@ -547,8 +547,8 @@ in
         };
       };
 
-      extraConfig = mkOption {
-        type = types.lines;
+      extraConfig = lib.mkOption {
+        type = lib.types.lines;
         default = "";
         description = ''
           Additional lines to append to `config.php`.
@@ -582,7 +582,7 @@ in
       ${poolName} = {
         inherit (cfg) user;
         inherit phpPackage;
-        settings = mapAttrs (name: mkDefault) {
+        settings = mapAttrs (name: lib.mkDefault) {
           "listen.owner" = "nginx";
           "listen.group" = "nginx";
           "listen.mode" = "0600";
@@ -656,18 +656,18 @@ in
         };
 
         wantedBy = [ "multi-user.target" ];
-        requires = optional mysqlLocal "mysql.service" ++ optional pgsqlLocal "postgresql.service";
+        requires = lib.optional mysqlLocal "mysql.service" ++ lib.optional pgsqlLocal "postgresql.service";
         after = [
           "network.target"
         ]
-        ++ optional mysqlLocal "mysql.service"
-        ++ optional pgsqlLocal "postgresql.service";
+        ++ lib.optional mysqlLocal "mysql.service"
+        ++ lib.optional pgsqlLocal "postgresql.service";
       };
     };
 
     services.mysql = lib.mkIf mysqlLocal {
       enable = true;
-      package = mkDefault pkgs.mariadb;
+      package = lib.mkDefault pkgs.mariadb;
       ensureDatabases = [ cfg.database.name ];
       ensureUsers = [
         {
@@ -680,7 +680,7 @@ in
     };
 
     services.postgresql = lib.mkIf pgsqlLocal {
-      enable = mkDefault true;
+      enable = lib.mkDefault true;
       ensureDatabases = [ cfg.database.name ];
       ensureUsers = [
         {
