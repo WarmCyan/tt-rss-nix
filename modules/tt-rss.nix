@@ -168,72 +168,76 @@ in
         '';
       };
 
-      database = {
-        type = mkOption {
-          type = types.enum [
-            "pgsql"
-            "mysql"
-          ];
-          default = "pgsql";
-          description = ''
-            Database to store feeds. Supported are pgsql and mysql.
-          '';
-        };
+      database = mkOption {
+        type = types.submodule {
+          options = {
+            type = mkOption {
+              type = types.enum [
+                "pgsql"
+                "mysql"
+              ];
+              default = "pgsql";
+              description = ''
+                Database to store feeds. Supported are pgsql and mysql.
+              '';
+            };
 
-        host = mkOption {
-          type = types.nullOr types.str;
-          default = null;
-          description = ''
-            Host of the database. Leave null to use Unix domain socket.
-          '';
-        };
+            host = mkOption {
+              type = types.nullOr types.str;
+              default = null;
+              description = ''
+                Host of the database. Leave null to use Unix domain socket.
+              '';
+            };
 
-        name = mkOption {
-          type = types.str;
-          default = "tt_rss";
-          description = ''
-            Name of the existing database.
-          '';
-        };
+            name = mkOption {
+              type = types.str;
+              default = "tt_rss";
+              description = ''
+                Name of the existing database.
+              '';
+            };
 
-        user = mkOption {
-          type = types.str;
-          default = "tt_rss";
-          description = ''
-            The database user. The user must exist and has access to
-            the specified database.
-          '';
-        };
+            user = mkOption {
+              type = types.str;
+              default = "tt_rss";
+              description = ''
+                The database user. The user must exist and has access to
+                the specified database.
+              '';
+            };
 
-        password = mkOption {
-          type = types.nullOr types.str;
-          default = null;
-          description = ''
-            The database user's password.
-          '';
-        };
+            password = mkOption {
+              type = types.nullOr types.str;
+              default = null;
+              description = ''
+                The database user's password.
+              '';
+            };
 
-        passwordFile = mkOption {
-          type = types.nullOr types.str;
-          default = null;
-          description = ''
-            The database user's password.
-          '';
-        };
+            passwordFile = mkOption {
+              type = types.nullOr types.str;
+              default = null;
+              description = ''
+                The database user's password.
+              '';
+            };
 
-        port = mkOption {
-          type = types.nullOr types.port;
-          default = null;
-          description = ''
-            The database's port. If not set, the default ports will be provided (5432
-            and 3306 for pgsql and mysql respectively).
-          '';
-        };
+            port = mkOption {
+              type = types.nullOr types.port;
+              default = null;
+              description = ''
+                The database's port. If not set, the default ports will be provided (5432
+                and 3306 for pgsql and mysql respectively).
+              '';
+            };
 
-        createLocally = mkOption {
-          type = types.bool;
-          default = true;
-          description = "Create the database and database user locally.";
+            createLocally = mkOption {
+              type = types.bool;
+              default = true;
+              description = "Create the database and database user locally.";
+            };
+          };
         };
       };
 
