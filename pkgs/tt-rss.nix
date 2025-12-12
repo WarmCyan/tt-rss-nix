@@ -1,17 +1,14 @@
 # nixpkgs-update: no auto update
 {
   lib,
-  stdenv,
-  fetchgit,
-  nixosTests,
-  unstableGitUpdater,
+  pkgs,
 }:
 
-stdenv.mkDerivation rec {
+pkgs.stdenv.mkDerivation rec {
   pname = "tt-rss";
   version = "0-unstable-2025-04-17";
 
-  src = fetchgit {
+  src = pkgs.fetchgit {
     # url = "https://git.tt-rss.org/fox/tt-rss.git";
     url = "https://git.tt-rss.org/fox/tt-rss.git";
     rev = "be82663ac9b59de8a135178a519efe9f7ebae213";
@@ -30,11 +27,6 @@ stdenv.mkDerivation rec {
 
     runHook postInstall
   '';
-
-  passthru = {
-    tests = { inherit (nixosTests) tt-rss; };
-    updateScript = unstableGitUpdater { hardcodeZeroVersion = true; };
-  };
 
   meta = with lib; {
     description = "Web-based news feed (RSS/Atom) aggregator";
