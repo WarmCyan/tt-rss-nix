@@ -19,14 +19,14 @@
     let
       pkgs = pkgsFor.${system};
     in {
-      tt-rss-plugin-close-btn = import ./pkgs/tt-rss-plugin-close-btn.nix;
-      tt-rss-plugin-fresh-api = import ./pkgs/tt-rss-plugin-fresh-api.nix;
-      tt-rss-plugin-theme-feedly = import ./pkgs/tt-rss-plugin-theme-feedly.nix;
+      tt-rss-plugin-close-btn = import ./pkgs/tt-rss-plugin-close-btn.nix { inherit pkgs; };
+      tt-rss-plugin-fresh-api = import ./pkgs/tt-rss-plugin-fresh-api.nix { inherit pkgs; };
+      tt-rss-plugin-theme-feedly = import ./pkgs/tt-rss-plugin-theme-feedly.nix { inherit pkgs; };
       tt-rss = import ./pkgs/tt-rss.nix { inherit pkgs; };
     });
 
     nixosModules = {
-      tt-rss = import ./modules/tt-rss.nix { inherit pkgs; };
+      tt-rss = import ./modules/tt-rss.nix;
     };
   };
 }
