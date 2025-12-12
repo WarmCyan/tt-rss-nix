@@ -19,17 +19,6 @@ pkgs.stdenv.mkDerivation {
     cp -r api init.php $out/freshapi
   '';
 
-  meta = with lib; {
-    description = "Tiny Tiny RSS FreshAPI Plugin";
-    longDescription = ''
-      A FreshRSS / Google Reader API Plugin for Tiny-Tiny RSS
-    '';
-    license = with licenses; [ agpl3Only ];
-    homepage = "https://github.com/eric-pierce/freshapi";
-    maintainers = with maintainers; [ bigloser ];
-    inherit (tt-rss.meta) platforms;
-  };
-
 
   # src = fetchFromGitHub {
   #   owner = "eric-pierce";

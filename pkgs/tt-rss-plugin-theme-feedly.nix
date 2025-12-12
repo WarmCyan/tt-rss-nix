@@ -28,13 +28,13 @@ pkgs.stdenv.mkDerivation rec {
 
     cp -ra feedly *.css $out
   '';
-
-  meta = with lib; {
-    description = "Feedly theme for Tiny Tiny RSS";
-    license = licenses.mit;
-    homepage = "https://github.com/levito/tt-rss-feedly-theme";
-    maintainers = with maintainers; [ das_j ];
-    platforms = platforms.all;
-  };
+  #
+  # meta = with lib; {
+  #   description = "Feedly theme for Tiny Tiny RSS";
+  #   license = licenses.mit;
+  #   homepage = "https://github.com/levito/tt-rss-feedly-theme";
+  #   maintainers = with maintainers; [ das_j ];
+  #   platforms = platforms.all;
+  # };
 }
 
