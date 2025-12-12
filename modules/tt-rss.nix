@@ -559,7 +559,7 @@ in
 
   ###### implementation
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
 
     assertions = [
       {
@@ -578,7 +578,7 @@ in
       }
     ];
 
-    services.phpfpm.pools = mkIf (cfg.pool == "${poolName}") {
+    services.phpfpm.pools = lib.mkIf (cfg.pool == "${poolName}") {
       ${poolName} = {
         inherit (cfg) user;
         inherit phpPackage;
@@ -598,7 +598,7 @@ in
     };
 
     # NOTE: No configuration is done if not using virtual host
-    services.nginx = mkIf (cfg.virtualHost != null) {
+    services.nginx = lib.mkIf (cfg.virtualHost != null) {
       enable = true;
       virtualHosts = {
         ${cfg.virtualHost} = {
@@ -635,7 +635,7 @@ in
     ];
 
     systemd.services = {
-      phpfpm-tt-rss = mkIf (cfg.pool == "${poolName}") {
+      phpfpm-tt-rss = lib.mkIf (cfg.pool == "${poolName}") {
         restartTriggers = [ servedRoot ];
       };
 
@@ -665,7 +665,7 @@ in
       };
     };
 
-    services.mysql = mkIf mysqlLocal {
+    services.mysql = lib.mkIf mysqlLocal {
       enable = true;
       package = mkDefault pkgs.mariadb;
       ensureDatabases = [ cfg.database.name ];
@@ -679,7 +679,7 @@ in
       ];
     };
 
-    services.postgresql = mkIf pgsqlLocal {
+    services.postgresql = lib.mkIf pgsqlLocal {
       enable = mkDefault true;
       ensureDatabases = [ cfg.database.name ];
       ensureUsers = [
