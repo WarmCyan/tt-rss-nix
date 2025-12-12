@@ -7,7 +7,7 @@
 
 with lib;
 let
-  cfg = config.services.tt-rss;
+  cfg = config.services.tt-rss-legacy;
 
   inherit (cfg) phpPackage;
 
@@ -19,7 +19,7 @@ let
     else
       cfg.database.port;
 
-  poolName = "tt-rss";
+  poolName = "tt-rss-legacy";
 
   mysqlLocal = cfg.database.createLocally && cfg.database.type == "mysql";
   pgsqlLocal = cfg.database.createLocally && cfg.database.type == "pgsql";
@@ -130,9 +130,9 @@ in
 
   options = {
 
-    services.tt-rss = {
+    services.tt-rss-legacy = {
 
-      enable = mkEnableOption "tt-rss";
+      enable = mkEnableOption "tt-rss-legacy";
 
       root = mkOption {
         type = types.path;
