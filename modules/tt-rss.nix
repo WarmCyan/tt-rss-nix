@@ -45,10 +45,10 @@ let
         putenv('TTRSS_MYSQL_CHARSET=UTF8');
 
         putenv('TTRSS_DB_TYPE=${cfg.database.type}');
-        putenv('TTRSS_DB_HOST=${optionalString (cfg.database.host != null) cfg.database.host}');
+        putenv('TTRSS_DB_HOST=${lib.optionalString (cfg.database.host != null) cfg.database.host}');
         putenv('TTRSS_DB_USER=${cfg.database.user}');
         putenv('TTRSS_DB_NAME=${cfg.database.name}');
-        putenv('TTRSS_DB_PASS=' ${optionalString (password != null) ". ${password}"});
+        putenv('TTRSS_DB_PASS=' ${lib.optionalString (password != null) ". ${password}"});
         putenv('TTRSS_DB_PORT=${toString dbPort}');
 
         putenv('TTRSS_AUTH_AUTO_CREATE=${boolToString cfg.auth.autoCreate}');
@@ -109,12 +109,12 @@ let
   servedRoot = pkgs.runCommand "tt-rss-served-root" { } ''
     cp --no-preserve=mode -r ${self.packages.${pkgs.system}.tt-rss-legacy} $out
     cp ${tt-rss-config} $out/config.php
-    ${optionalString (cfg.pluginPackages != [ ]) ''
+    ${lib.optionalString (cfg.pluginPackages != [ ]) ''
       for plugin in ${concatStringsSep " " cfg.pluginPackages}; do
       cp -r "$plugin"/* "$out/plugins.local/"
       done
     ''}
-    ${optionalString (cfg.themePackages != [ ]) ''
+    ${lib.optionalString (cfg.themePackages != [ ]) ''
       for theme in ${concatStringsSep " " cfg.themePackages}; do
       cp -r "$theme"/* "$out/themes.local/"
       done
